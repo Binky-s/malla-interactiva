@@ -1,0 +1,101 @@
+/* Estilos generales */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.2em;
+}
+
+/* Tarjetas de semestres */
+.semester {
+    background: white;
+    margin-bottom: 25px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.semester:hover {
+    transform: translateY(-5px);
+}
+
+/* Items de ramos */
+.course {
+    margin: 12px 0;
+    padding: 12px 15px;
+    border-left: 4px solid #3498db;
+    background: #f8f9fa;
+    border-radius: 8px;
+    position: relative;
+}
+
+.locked {
+    border-left-color: #e74c3c;
+    opacity: 0.7;
+}
+
+.unlocked {
+    border-left-color: #2ecc71;
+}
+
+/* Checkboxes */
+input[type="checkbox"] {
+    margin-right: 12px;
+    transform: scale(1.3);
+    cursor: pointer;
+}
+
+/* Acordeón (prerrequisitos y desbloqueos) */
+.prereq, .unlocks {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    margin-left: 28px;
+    font-size: 0.9em;
+    color: #555;
+    background: #f1f1f1;
+    border-radius: 4px;
+    padding: 0 10px;
+}
+
+.prereq.visible, .unlocks.visible {
+    max-height: 100px;
+    opacity: 1;
+    padding: 8px 10px;
+    margin-top: 8px;
+    margin-bottom: 5px;
+}
+
+/* Icono de flecha */
+.course label::after {
+    content: "▼";
+    font-size: 0.8em;
+    margin-left: 8px;
+    color: #7f8c8d;
+    transition: transform 0.3s;
+}
+
+.course label.active::after {
+    transform: rotate(180deg);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    .semester {
+        padding: 15px;
+    }
+}
