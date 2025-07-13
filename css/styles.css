@@ -1,3 +1,4 @@
+/* RESET Y VARIABLES */
 * {
     margin: 0;
     padding: 0;
@@ -5,13 +6,21 @@
 }
 
 :root {
-    --color-approve: #C9E7ED;
-    --color-pending: #FDDAF5;
-    --color-semester: #E8D8FF;
-    --color-bg: #FFFDF7;
-    --color-text: #000000;
+    --color-pending: #FDDAF5;    /* Rosa pastel (pendiente) */
+    --color-approve: #C9E7ED;    /* Azul pastel (aprobado) */
+    --color-semester: #E8D8FF;   /* Lila pastel (semestres) */
+    --color-bg: #FFFDF7;         /* Fondo crema */
+    --color-text: #000000;       /* Texto negro */
 }
 
+/* FUENTES */
+@import url('https://fonts.googleapis.com/css2?family=Nixie+One&family=Bookman+Old+Style&display=swap');
+@font-face {
+    font-family: 'Lucida Handwriting';
+    src: local('Lucida Handwriting'), local('LucidaHandwriting');
+}
+
+/* ESTRUCTURA GENERAL */
 body {
     font-family: 'Bookman Old Style', serif;
     background-color: var(--color-bg);
@@ -20,6 +29,7 @@ body {
     padding: 30px;
 }
 
+/* TÍTULO PRINCIPAL */
 .header-container {
     text-align: center;
     margin-bottom: 40px;
@@ -28,8 +38,8 @@ body {
 h1 {
     font-family: 'Nixie One', cursive;
     font-size: 2.8rem;
-    display: inline-block;
     position: relative;
+    display: inline-block;
 }
 
 h1::after {
@@ -38,15 +48,16 @@ h1::after {
     right: -40px;
     top: -15px;
     font-size: 1.8rem;
-    animation: twinkle 2s infinite;
+    animation: twinkle 2s infinite alternate;
 }
 
+/* TARJETAS DE SEMESTRE */
 .semester {
     background-color: var(--color-semester);
     margin-bottom: 35px;
     padding: 25px;
     border-radius: 15px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
     position: relative;
 }
 
@@ -63,33 +74,41 @@ h1::after {
     font-family: 'Lucida Handwriting', cursive;
     font-size: 1.7rem;
     margin-bottom: 20px;
-    border-bottom: 2px dashed rgba(0,0,0,0.1);
+    border-bottom: 2px dashed rgba(0, 0, 0, 0.1);
     padding-bottom: 10px;
 }
 
+/* ITEMS DE RAMOS */
 .course {
-    background-color: rgba(255,255,255,0.85);
+    background-color: var(--color-pending); /* Rosa por defecto */
     margin: 18px 0;
     padding: 16px 20px;
     border-radius: 10px;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
 }
 
+.course.unlocked {
+    background-color: var(--color-approve); /* Azul al aprobar */
+}
+
+/* CHECKBOXES */
 input[type="checkbox"] {
     -webkit-appearance: none;
     appearance: none;
     width: 20px;
     height: 20px;
-    border: 2px solid var(--color-pending);
+    border: 2px solid #aaa; /* Borde gris */
     border-radius: 5px;
     margin-right: 15px;
     cursor: pointer;
+    background: white;
+    transition: all 0.3s ease;
 }
 
 input[type="checkbox"]:checked {
-    background-color: var(--color-approve);
-    border-color: var(--color-approve);
+    border-color: #4CAF50; /* Borde verde al aprobar */
 }
 
 input[type="checkbox"]:checked::after {
@@ -98,14 +117,48 @@ input[type="checkbox"]:checked::after {
     left: 3px;
     top: -1px;
     font-size: 14px;
+    color: #5A5A5A;
 }
 
+/* PRERREQUISITOS (OCULTOS INICIALMENTE) */
+.prereq, .unlocks {
+    display: none;
+    margin-left: 35px;
+    padding: 8px 0;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.prereq.visible, .unlocks.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+/* ANIMACIONES */
 @keyframes twinkle {
-    0%, 100% { opacity: 0.5; transform: scale(0.8); }
-    50% { opacity: 1; transform: scale(1.1); }
+    0% { opacity: 0.5; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1.1); }
 }
 
 @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-8px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+    .semester {
+        padding: 20px 15px;
+    }
 }
