@@ -1,4 +1,3 @@
-/* RESET */
 * {
     margin: 0;
     padding: 0;
@@ -6,28 +5,24 @@
 }
 
 :root {
-    --color-approve: #C9E7ED;    /* Azul pastel (aprobado) */
-    --color-pending: #FDDAF5;    /* Rosa pastel (pendiente) */
-    --color-semester: #E8D8FF;   /* Lila pastel (semestres) */
-    --color-bg: #FFFDF7;         /* Fondo crema */
-    --color-text: #000000;       /* Texto negro */
+    --color-approve: #C9E7ED;
+    --color-pending: #FDDAF5;
+    --color-semester: #E8D8FF;
+    --color-bg: #FFFDF7;
+    --color-text: #000000;
 }
 
-/* FUENTES */
 body {
     font-family: 'Bookman Old Style', serif;
     background-color: var(--color-bg);
     color: var(--color-text);
     line-height: 1.6;
     padding: 30px;
-    min-height: 100vh;
 }
 
-/* TÍTULO */
 .header-container {
     text-align: center;
     margin-bottom: 40px;
-    position: relative;
 }
 
 h1 {
@@ -35,8 +30,6 @@ h1 {
     font-size: 2.8rem;
     display: inline-block;
     position: relative;
-    padding-bottom: 10px;
-    color: var(--color-text);
 }
 
 h1::after {
@@ -45,13 +38,7 @@ h1::after {
     right: -40px;
     top: -15px;
     font-size: 1.8rem;
-    animation: twinkle 2s infinite alternate;
-}
-
-/* SEMESTRES */
-#malla-container {
-    max-width: 900px;
-    margin: 0 auto;
+    animation: twinkle 2s infinite;
 }
 
 .semester {
@@ -59,10 +46,8 @@ h1::after {
     margin-bottom: 35px;
     padding: 25px;
     border-radius: 15px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
     position: relative;
-    overflow: hidden;
-    transition: transform 0.4s ease;
 }
 
 .semester::before {
@@ -71,39 +56,28 @@ h1::after {
     top: 15px;
     right: 20px;
     font-size: 1.5rem;
-    opacity: 0.8;
-    animation: float 4s ease-in-out infinite;
+    animation: float 3s infinite;
 }
 
 .semester h2 {
     font-family: 'Lucida Handwriting', cursive;
     font-size: 1.7rem;
     margin-bottom: 20px;
-    color: var(--color-text);
-    border-bottom: 2px dashed rgba(0, 0, 0, 0.1);
+    border-bottom: 2px dashed rgba(0,0,0,0.1);
     padding-bottom: 10px;
 }
 
-/* RAMOS */
 .course {
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(255,255,255,0.85);
     margin: 18px 0;
     padding: 16px 20px;
     border-radius: 10px;
-    transition: all 0.3s ease;
     display: flex;
     align-items: center;
 }
 
-.course:hover {
-    background-color: rgba(255, 255, 255, 0.95);
-    transform: translateX(5px);
-}
-
-/* CHECKBOXES */
 input[type="checkbox"] {
     -webkit-appearance: none;
-    -moz-appearance: none;
     appearance: none;
     width: 20px;
     height: 20px;
@@ -111,9 +85,6 @@ input[type="checkbox"] {
     border-radius: 5px;
     margin-right: 15px;
     cursor: pointer;
-    position: relative;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
 }
 
 input[type="checkbox"]:checked {
@@ -124,75 +95,17 @@ input[type="checkbox"]:checked {
 input[type="checkbox"]:checked::after {
     content: "✓";
     position: absolute;
-    color: #5A5A5A;
-    font-size: 14px;
     left: 3px;
     top: -1px;
+    font-size: 14px;
 }
 
-/* ACORDEÓN */
-.prereq, .unlocks {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    font-size: 0.95rem;
-    margin-left: 35px;
-    color: #555;
-    transition: all 0.5s ease;
-}
-
-.prereq.visible, .unlocks.visible {
-    max-height: 150px;
-    opacity: 1;
-    padding: 10px 0;
-}
-
-/* ESTADOS */
-.unlocked {
-    border-left: 4px solid var(--color-approve);
-}
-
-.locked {
-    border-left: 4px solid var(--color-pending);
-    opacity: 0.8;
-}
-
-/* ANIMACIONES */
 @keyframes twinkle {
-    0% { opacity: 0.5; transform: scale(0.8); }
-    100% { opacity: 1; transform: scale(1.1); }
+    0%, 100% { opacity: 0.5; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.1); }
 }
 
 @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-8px); }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.semester {
-    animation: fadeIn 0.7s ease forwards;
-    opacity: 0;
-}
-
-.semester:nth-child(1) { animation-delay: 0.1s; }
-.semester:nth-child(2) { animation-delay: 0.2s; }
-/* ... (hasta el semestre 10) */
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    body {
-        padding: 15px;
-    }
-    
-    h1 {
-        font-size: 2rem;
-    }
-    
-    .semester {
-        padding: 20px 15px;
-    }
 }
