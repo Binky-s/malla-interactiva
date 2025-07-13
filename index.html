@@ -3,13 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malla Curricular - Química y Farmacia USS</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Malla Curricular - Química y Farmacia</title>
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Nixie+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bookman+Old+Style:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Fuente Lucida Handwriting con fallback */
+        @font-face {
+            font-family: 'Lucida Handwriting';
+            src: local('Lucida Handwriting'), 
+                 local('LucidaHandwriting'),
+                 url('https://fonts.cdnfonts.com/css/lucida-handwriting') format('truetype');
+            font-display: swap;
+        }
+    </style>
 </head>
 <body>
-    <h1><i class="fas fa-graduation-cap"></i> Malla Curricular - Química y Farmacia</h1>
+    <div class="header-container">
+        <h1><i class="fas fa-graduation-cap"></i> Malla Curricular - Química y Farmacia</h1>
+    </div>
+    
     <div id="malla-container"></div>
+    
     <script src="js/script.js"></script>
 </body>
 </html>
