@@ -107,10 +107,40 @@ function renderMalla() {
             checkbox.checked = localStorage.getItem(curso.nombre) === 'true';
             checkbox.disabled = !checkPrereqs(curso.prerreq);
             
-            checkbox.addEventListener('change', function() {
-                localStorage.setItem(this.dataset.nombre, this.checked);
-                updateMalla();
-            });
+           checkbox.addEventListener('change', function() {
+    // Guardar estado actual
+    localStorage.setItem(this.dataset.nombre, this.checked);
+    
+    // --- NUEVO: EFECTO CONFETI --- //
+    if (this.checked) { // Solo si se está marcando (no al desmarcar)
+        const colors = ['#FF5252', '#FFD740', '#64FFDA', '#448AFF', '#B388FF', '#FF80AB'];
+        const rect = this.getBoundingClientRect();
+        
+        // Crear 30 partículas de confeti
+        for (let i = 0; i < 30; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            
+            // Posición inicial (en el checkbox)
+            confetti.style.left = `${rect.left + rect.width/2}px`;
+            confetti.style.top = `${rect.top}px`;
+            
+            // Estilo aleatorio
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.width = `${Math.random() * 8 + 4}px`;
+            confetti.style.height = `${Math.random() * 8 + 4}px`;
+            confetti.style.animationDuration = `${Math.random() * 1 + 1.5}s`;
+            
+            document.body.appendChild(confetti);
+            
+            // Eliminar después de animarse
+            setTimeout(() => confetti.remove(), 2000);
+        }
+    }
+    // --- FIN DEL NUEVO CÓDIGO --- //
+    
+    updateMalla(); // Actualizar la interfaz
+});
 
             // Label
             const label = document.createElement('label');
