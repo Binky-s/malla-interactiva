@@ -1,101 +1,297 @@
-/* Estilos generales */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* ---------------------------------- */
+/* RESET Y CONFIGURACIONES GENERALES */
+/* ---------------------------------- */
+* {
     margin: 0;
-    padding: 20px;
-    background-color: #f8f9fa;
-    color: #333;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-approve: #C9E7ED;    /* Azul pastel (aprobado) */
+    --color-pending: #FDDAF5;    /* Rosa pastel (pendiente) */
+    --color-semester: #E8D8FF;   /* Lila pastel (semestres) */
+    --color-bg: #FFFDF7;         /* Fondo crema */
+    --color-text: #000000;       /* Texto negro */
+}
+
+/* ------------------------- */
+/* FUENTES PERSONALIZADAS */
+/* ------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Nixie+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bookman+Old+Style:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* Fuente Lucida Handwriting (fallback para todos los navegadores) */
+@font-face {
+    font-family: 'Lucida Handwriting';
+    src: local('Lucida Handwriting'), 
+         local('LucidaHandwriting'),
+         url('https://fonts.cdnfonts.com/css/lucida-handwriting') format('truetype');
+}
+
+/* ------------------------- */
+/* ESTILOS GENERALES */
+/* ------------------------- */
+body {
+    font-family: 'Bookman Old Style', serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
     line-height: 1.6;
+    padding: 30px;
+    min-height: 100vh;
 }
 
-h1 {
-    color: #2c3e50;
+/* ------------------------- */
+/* TÍTULO PRINCIPAL */
+/* ------------------------- */
+.header-container {
     text-align: center;
-    margin-bottom: 30px;
-    font-size: 2.2em;
-}
-
-/* Tarjetas de semestres */
-.semester {
-    background: white;
-    margin-bottom: 25px;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.semester:hover {
-    transform: translateY(-5px);
-}
-
-/* Items de ramos */
-.course {
-    margin: 12px 0;
-    padding: 12px 15px;
-    border-left: 4px solid #3498db;
-    background: #f8f9fa;
-    border-radius: 8px;
+    margin-bottom: 40px;
     position: relative;
 }
 
-.locked {
-    border-left-color: #e74c3c;
-    opacity: 0.7;
+h1 {
+    font-family: 'Nixie One', cursive;
+    font-size: 2.8rem;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 10px;
 }
 
-.unlocked {
-    border-left-color: #2ecc71;
+h1::after {
+    content: "✨";
+    position: absolute;
+    right: -40px;
+    top: -15px;
+    font-size: 1.8rem;
+    animation: twinkle 2s infinite alternate;
 }
 
-/* Checkboxes */
+/* ------------------------- */
+/* CONTENEDOR DE SEMESTRES */
+/* ------------------------- */
+#malla-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* ------------------------- */
+/* TARJETAS DE SEMESTRE */
+/* ------------------------- */
+.semester {
+    background-color: var(--color-semester);
+    margin-bottom: 35px;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.semester::before {
+    content: "✨";
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.5rem;
+    opacity: 0.8;
+    animation: float 4s ease-in-out infinite;
+}
+
+.semester:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}
+
+.semester h2 {
+    font-family: 'Lucida Handwriting', cursive;
+    font-size: 1.7rem;
+    margin-bottom: 20px;
+    color: var(--color-text);
+    border-bottom: 2px dashed rgba(0, 0, 0, 0.1);
+    padding-bottom: 10px;
+    position: relative;
+}
+
+/* ------------------------- */
+/* ITEMS DE RAMOS */
+/* ------------------------- */
+.course {
+    background-color: rgba(255, 255, 255, 0.85);
+    margin: 18px 0;
+    padding: 16px 20px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.course::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: linear-gradient(to bottom, #E8D8FF, #C9E7ED);
+}
+
+.course:hover {
+    background-color: rgba(255, 255, 255, 0.95);
+    transform: translateX(5px);
+}
+
+/* ------------------------- */
+/* CHECKBOXES PERSONALIZADOS */
+/* ------------------------- */
 input[type="checkbox"] {
-    margin-right: 12px;
-    transform: scale(1.3);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-pending);
+    border-radius: 5px;
+    margin-right: 15px;
     cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
 }
 
-/* Acordeón (prerrequisitos y desbloqueos) */
+input[type="checkbox"]:checked {
+    background-color: var(--color-approve);
+    border-color: var(--color-approve);
+}
+
+input[type="checkbox"]:checked::after {
+    content: "✓";
+    position: absolute;
+    color: #5A5A5A;
+    font-size: 14px;
+    left: 3px;
+    top: -1px;
+    font-weight: bold;
+}
+
+/* ------------------------- */
+/* ETIQUETAS Y TEXTO */
+/* ------------------------- */
+.course label {
+    font-size: 1.1rem;
+    cursor: pointer;
+    flex-grow: 1;
+    transition: color 0.3s ease;
+    position: relative;
+    padding-left: 5px;
+}
+
+.course label:hover {
+    color: #333;
+}
+
+/* ------------------------- */
+/* ACORDEÓN (PRERREQUISITOS) */
+/* ------------------------- */
 .prereq, .unlocks {
     max-height: 0;
     overflow: hidden;
     opacity: 0;
-    transition: all 0.3s ease;
-    margin-left: 28px;
-    font-size: 0.9em;
+    font-size: 0.95rem;
+    margin-left: 35px;
     color: #555;
-    background: #f1f1f1;
-    border-radius: 4px;
-    padding: 0 10px;
+    transition: all 0.5s ease;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 0 0 8px 8px;
+}
+
+.prereq {
+    margin-top: 8px;
 }
 
 .prereq.visible, .unlocks.visible {
-    max-height: 100px;
+    max-height: 150px;
     opacity: 1;
-    padding: 8px 10px;
-    margin-top: 8px;
+    padding: 10px 15px;
     margin-bottom: 5px;
 }
 
-/* Icono de flecha */
-.course label::after {
-    content: "▼";
-    font-size: 0.8em;
-    margin-left: 8px;
-    color: #7f8c8d;
-    transition: transform 0.3s;
+/* ------------------------- */
+/* ESTADOS (APROBADO/BLOQUEADO) */
+/* ------------------------- */
+.unlocked {
+    border-left: 4px solid var(--color-approve);
 }
 
-.course label.active::after {
-    transform: rotate(180deg);
+.locked {
+    border-left: 4px solid var(--color-pending);
+    opacity: 0.8;
 }
 
-/* Responsive */
+.locked label {
+    color: #666;
+}
+
+/* ------------------------- */
+/* ANIMACIONES */
+/* ------------------------- */
+@keyframes twinkle {
+    0% { opacity: 0.5; transform: scale(0.8) rotate(-10deg); }
+    100% { opacity: 1; transform: scale(1.1) rotate(5deg); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(5deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.semester {
+    animation: fadeIn 0.7s ease forwards;
+    opacity: 0;
+}
+
+.semester:nth-child(1) { animation-delay: 0.1s; }
+.semester:nth-child(2) { animation-delay: 0.2s; }
+.semester:nth-child(3) { animation-delay: 0.3s; }
+.semester:nth-child(4) { animation-delay: 0.4s; }
+.semester:nth-child(5) { animation-delay: 0.5s; }
+.semester:nth-child(6) { animation-delay: 0.6s; }
+.semester:nth-child(7) { animation-delay: 0.7s; }
+.semester:nth-child(8) { animation-delay: 0.8s; }
+.semester:nth-child(9) { animation-delay: 0.9s; }
+.semester:nth-child(10) { animation-delay: 1s; }
+
+/* ------------------------- */
+/* DISEÑO RESPONSIVE */
+/* ------------------------- */
 @media (max-width: 768px) {
     body {
-        padding: 10px;
-    }
-    .semester {
         padding: 15px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .semester {
+        padding: 20px 15px;
+    }
+    
+    .course {
+        padding: 12px 15px;
+    }
+    
+    input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        margin-right: 10px;
     }
 }
